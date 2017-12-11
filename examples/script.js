@@ -33,3 +33,5 @@ for(const el of boxesArr){
     else
         el.textContent = "I changed to blue";
 }
+
+// we can also use the includes methods eg el.className.includes("blue")
