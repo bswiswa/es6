@@ -160,7 +160,7 @@ If we are using multiple arguments in an arrow function, we must use parentheses
 box5.clickMe();
 `
 This will not work as expected because only object methods use the object as their *this* reference. Regular function calls will use the global window object as their this reference. 
-Thus the clickMe function uses the box5 object as its *this* reference but the anonymous function/event handler inside of it is a regular function call and thus it uses the global window as its object. The window object does not have the position and color properties and hence our code above would not work. 
+Thus the clickMe function uses the box5 object as its *this* reference but the anonymous function/event handler inside of it is a regular function call and thus it uses the global context which has window as its object. The window object does not have the position and color properties and hence our code above would not work. 
 The workaround to this is shown below:
 
  ES5 workaround:
@@ -190,3 +190,64 @@ In ES6, the arrow functions always use the *this* object of the surrounding meth
     }
 };
 `
+Use arrow functions when you want to preserve the value of the surrounding this object.
+
+### Function constructors and Arrow functions
+ES5
+`
+function Person(name){
+    this.name = name;
+}
+
+Person.prototype.myFriends = function(friends){
+    var arr = friends.map(function(el){
+        return this.name + " is friends with " + el; 
+    });
+    console.log(arr);
+}
+
+var friends = ["Bob", "Jane", "Mark"];
+(new Person("Batsi")).myFriends(friends);
+`
+The above code will run but *this.name* will be undefined. The problem here is similar to what we had above -- the myFriends function rightfully points to the Person object as its *this* reference. However, the map function's anonymous function is a regular function and so does not point to the Person object that invoked the whole process. Instead, this anonymous function is pointing to the window object since it is a regular function call in a global context.
+We can fix this in ES5 in two ways:
+1. By using the self = this declaration:
+`
+Person.prototype.myFriends = function(friends){
+    var self = this;
+    var arr = friends.map(function(el){
+        return self.name + " is friends with " + el; 
+    });
+    console.log(arr);
+}
+`
+OR
+2. by using the *bind*, *call* and *apply* methods since they allow us to define the *this* variable manually. *call* immediately runs the function whilst *bind* can be used to create a copy of a function, with some preset variables.
+
+`
+Person.prototype.myFriends = function(friends){
+    var arr = friends.map(function(el){
+        return this.name + " is friends with " + el; 
+    }.bind(this));
+    console.log(arr);
+}
+`
+By binding this to map's anonymous function, we preset the this variable inside of it
+
+In ES6, arrow functions help us avoid this issue/having to use self = this or bind
+`
+Person.prototype.myFriends = function(friends){
+    var arr = friends.map(el => 
+        this.name + " is friends with " + el);
+    console.log(arr);
+}
+`
+We can even use template literals
+`
+Person.prototype.myFriends = function(friends){
+    var arr = friends.map(el => 
+        ``${this.name} is friends with ${el}``);
+    console.log(arr);
+}
+`
+
