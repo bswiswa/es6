@@ -18,9 +18,18 @@ const boxesArr = Array.from(boxes);
 boxesArr.forEach(el=> el.style.backgroundColor = "dodgerblue");
 
 //ES5
-for(var i = 0; i < boxesArr.length; i++){
+/*for(var i = 0; i < boxesArr.length; i++){
     if(boxesArr[i].className === "box blue")
         continue;
     else
         boxesArr[i].textContent = "I changed to blue";
+}
+*/
+
+//ES6
+for(const el of boxesArr){
+    if(el.className === "box blue")
+        continue;
+    else
+        el.textContent = "I changed to blue";
 }
