@@ -1,10 +1,8 @@
-const box6 = {
-    color: "green",
-    position: 1,
-    clickMe: function(){ document.querySelector(".green").addEventListener("click", ()=>{
-            
-           alert("This is box number " + this.position + " , and it is "+ this.color); 
-        });
-    }
-};
-box6.clickMe();
+const boxes = document.querySelectorAll(".box");
+
+//ES5
+var boxesArr = Array.prototype.slice.call(boxes);
+
+boxesArr.forEach(function(el){
+    el.style.backgroundColor = "dodgerblue";
+});
