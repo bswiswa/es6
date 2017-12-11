@@ -250,5 +250,62 @@ Person.prototype.myFriends = function(friends){
     console.log(arr);
 }
 `
+## Destructuring
+### For arrays:
+ES5:
+`
+var batsi = [ "Batsi", 26];
+var name = batsi[0];
+var age = batsi[1];
+console.log(name + " " + age);
+//Batsi 26
+`
+ES6:
+`
+let batsi = ["Batsi", 26];
+let [name, age] = batsi;
+console.log(``${name} ${age}``);
+//Batsi 26
+`
+### For objects:
+ES5:
+`
+var batsi = { name: "Batsi", age: 26 };
+var name = batsi.name;
+var age = batsi.age;
+console.log(name + " " + age);
+//Batsi 26
+`
+ES6:
+`
+let batsi = { name: "Batsi", age: 26 };
+let { name, age } = batsi;
+console.log(``${name} ${age}``);
+//Batsi 26
+`
+Note that in ES6, the names of the new variables have to exactly match keynames in the object in order for them to map as show above. Otherwise they will be undefined.
+If we want to use different names for the variables we do it as follows:
+`
+let batsi = { name: "Batsi", age: 26 };
+let { name: theName, age: theAge } = batsi;
+console.log(``${theName} ${theAge}``);
+//Batsi 26
+`
+### Returning multiple variables
+If we have the function below that returns multiple values:
+
+`function calcRetirementAge(year){
+    const age = new Date().getFullYear() - year;
+    return [age, 65 - age];
+}
+`
+ES5:
+`var ageArr = calcRetirementAge(1990);
+var age = ageArr[0];
+var retirement = ageArr[1];
+`
+ES6:
+`let [age, retirement] = calcRetirementAge(1990);
+`
 
 
