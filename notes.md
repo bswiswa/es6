@@ -307,5 +307,10 @@ var retirement = ageArr[1];
 ES6:
 `let [age, retirement] = calcRetirementAge(1990);
 `
-
+## Arrays
+### New methods
+- use the *Array.from* method to get an array from a list
+### Looping
+When looping through an array with *forEach* or *map* we cannot use a *break* statement. We have to use the simple for(var i...) loop
+With ES6 we can use the for-of loop eg for(let el of array){}
 
