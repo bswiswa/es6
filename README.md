@@ -12,3 +12,4 @@
 9. Maps
 10. Classes and subclasses
 11. How to use ES2015/ES6 today
+

@@ -144,3 +144,6 @@ If we are using multiple arguments in an arrow function, we must use parentheses
     return ``Age of element ${index + 1} is ${now - el}``
  } );
  `
+ ### this and Arrow Functions
+ Arrow functions do not have their own *this* keyword, they use the *this* keyword of the function that they are written in. We say that they have a lexical *this* variable
+ 
