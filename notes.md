@@ -87,3 +87,32 @@ In ES6, `let` and `const` are block-scoped. Thus we can achieve the same level o
 console.log(name + " " + dob); // will not work
  `
 
+## Strings
+### Template Literals
+ES5
+`
+var firstName = "Batsi";
+var lastName = "Swiswa";
+
+console.log("This is "+ firstName + " " + lastName);
+`
+ES6
+Use back-ticks to tell JavaScript that we want to use a template literal
+`
+let firstName = "Batsi";
+let lastName = "Swiswa";
+
+console.log(``This is ${firstName} ${lastName}. This year is ${(new Date()).getFullYear()}``);
+`
+You can even run functions inside template literals as well as shown above.
+Other methods available for strings
+` let firstName = "Batsi";
+    console.log(firstName.startsWith("B"));
+    //true
+    console.log(firstName.endsWith("i"));
+    //false
+    console.log(firstName.includes("o"));
+    //false
+    console.log(firstName.repeat(3));
+    //BatsiBatsiBatsi
+    `
