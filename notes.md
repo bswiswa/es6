@@ -8,7 +8,8 @@ Currently ES5 is the version supported by all browsers.
 `let` keyword is used to declare variables
 Variables declared with `let` are block-scoped whilst those declared with `var` are function-scoped.
 Thus:
-```function es5(condition){
+```
+function es5(condition){
     if(condition){
         var name;
         var dob;
@@ -19,7 +20,8 @@ Thus:
 }
 ```
 The above code will compile in ES5 because `var name` is function-scoped. However:
-```function es6(condition){
+```
+function es6(condition){
     if(condition){
         let name;
         const dob;
@@ -30,7 +32,8 @@ The above code will compile in ES5 because `var name` is function-scoped. Howeve
 }
 ```
 does not compile in ES6 because `let name` is block-scoped and thus `name` is only accessible in the if block. the following will work:
-```function es6(condition){
+```
+function es6(condition){
     let name;
     const dob = "01/01/1900";
     
@@ -68,7 +71,8 @@ console.log(i);
 ## Blocks and IIFEs
 In ES5 we used IIFEs for data privacy by creating anonymous funcitons of code that hid some variables. This was the only way to hide data since `var` is function-scoped. For example
 
-```(function(){
+```
+(function(){
     var name = "Batsi";
     var dob = "01/01/1900";
 })();
@@ -107,7 +111,8 @@ console.log(``This is ${firstName} ${lastName}. This year is ${(new Date()).getF
 You can even run functions inside template literals as well as shown above.
 ### New String methods
 Other methods available for strings
-``` let firstName = "Batsi";
+``` 
+let firstName = "Batsi";
     console.log(firstName.startsWith("B"));
     //true
     console.log(firstName.endsWith("i"));
@@ -120,7 +125,8 @@ Other methods available for strings
 
 ## Arrow Functions
 ES5
-```var years = [1990, 1965, 1982];
+```
+var years = [1990, 1965, 1982];
 var ages = years.map(function(el){
     return 2017 - el;
 });
@@ -128,17 +134,20 @@ console.log(ages);
 //[27, 52, 35]
 ```
 ES6
-```const years = [1990, 1965, 1982];
+```
+const years = [1990, 1965, 1982];
  const ages = years.map(el => 2017 - el);
  console.log(ages);
  //[27, 52, 35]
  ```
 Arrow function lets us write less code
 If we are using multiple arguments in an arrow function, we must use parentheses eg
-```const ageStrings = years.map((el, index) => ``Age of element ${index + 1} is ${2017 - el}``);
+```
+const ageStrings = years.map((el, index) => ``Age of element ${index + 1} is ${2017 - el}``);
  ```
  If our function has more than one line, we must use curly braces and also explicitly specify the return value:
- ```const ageStrings = years.map((el, index) => {
+ ```
+ const ageStrings = years.map((el, index) => {
     const now = new Date().getFullYear();
     const age = new - el;
     return ``Age of element ${index + 1} is ${now - el}``
@@ -147,7 +156,8 @@ If we are using multiple arguments in an arrow function, we must use parentheses
  ### this and Arrow Functions
  Arrow functions do not have their own *this* keyword, they use the *this* keyword of the function that they are written in. We say that they have a lexical *this* variable
  ES5 *this* (problem?):
- ```var box5 = {
+ ```
+ var box5 = {
     color: "green",
     position: 1,
     clickMe: function(){
@@ -164,7 +174,8 @@ Thus the clickMe function uses the box5 object as its *this* reference but the a
 The workaround to this is shown below:
 
  ES5 workaround:
- ```var box5 = {
+ ```
+ var box5 = {
     color: "green",
     position: 1,
     clickMe: function(){
@@ -180,7 +191,8 @@ box5.clickMe();
 Here we use the self variable set to our object in our regular function call/event handler and it works fine.
 In ES6, the arrow functions always use the *this* object of the surrounding method and so we avoid the problem above:
 
-```const box6 = {
+```
+const box6 = {
     color: "green",
     position: 1,
     clickMe: function(){
@@ -295,18 +307,21 @@ console.log(``${theName} ${theAge}``);
 ### Returning multiple variables
 If we have the function below that returns multiple values:
 
-```function calcRetirementAge(year){
+```
+function calcRetirementAge(year){
     const age = new Date().getFullYear() - year;
     return [age, 65 - age];
 }
 ```
 ES5:
-```var ageArr = calcRetirementAge(1990);
+```
+var ageArr = calcRetirementAge(1990);
 var age = ageArr[0];
 var retirement = ageArr[1];
 ```
 ES6:
-```let [age, retirement] = calcRetirementAge(1990);
+```
+let [age, retirement] = calcRetirementAge(1990);
 ```
 ## Arrays
 ### New methods
@@ -328,13 +343,15 @@ function addFourNumbers(a, b, c, d){
 if we had these numbers in an array, how would we pass those numbers into this function?
 
 In ES5 we can use the *apply* method. It receives an array and calls a function that will be used on each element of the array. We use it in this case as follows
-``` var nums = [18, 38, 12, 21];
+``` 
+var nums = [18, 38, 12, 21];
     var sums = addFourNumbers.apply(null, nums);
 ```
 Here apply takes *null* as its *this* reference since it is not needed but also takes in the array on whose elements and uses all of them as parameters to the addFourNumbers function.
 
 In ES6 we use the spread operator which expands an array into its components.
-```let nums = [18, 38, 12, 21];
+```
+let nums = [18, 38, 12, 21];
 let sums = addFourNumbers(...nums);
 ```
 Spread operator can also be used to join arrays:
@@ -345,7 +362,8 @@ const family = [...parents, ...children];
 ```
 
 We can use the spread operator on other data structures as well eg a node list returned by *document.querySelectorAll()*
-```const h = document.querySelectorAll("h1");
+```
+const h = document.querySelectorAll("h1");
 const p = document.querySelectorAll("p");
 const headersAndParagraphs = [...h, ...p];
 ```
@@ -359,7 +377,8 @@ Rest parameters use three dots like the spread operator. The spread operator tra
 Each function has a special *arguments* variable which is an object with keys corresponding to the parameters passed into a function. It is an array-like structure but not an array.
 
 ES5:
-```function isFullAge(){
+```
+function isFullAge(){
     //get array from arguments object
     var argsArr = Array.prototype.slice.call(arguments);
     //loop and calculate
@@ -373,7 +392,8 @@ Even though isFullAge() is defined as taking no arguments, we can call it with v
 ES6:
 We can specify the rest parameter operator as an argument in functions that take variable number of arguments.
 The rest parameter will transform the arguments into an array and then passes it into the function
-```function isFullAge(...years){
+```
+function isFullAge(...years){
     years.forEach(el=> console.log((2017-el) >= 18);
 }
 ```
@@ -383,7 +403,8 @@ The spread operator can be used in a function call to expand a data structure be
 If we wanted to pass in the age limit dynamically to our isFullAge function here is how we would modify our functions in ES5 and ES6
 
 ES5:
-```function isFullAge(limit){
+```
+function isFullAge(limit){
     //get array from arguments object
     var argsArr = Array.prototype.slice.call(arguments, 1);
     //loop and calculate
@@ -395,14 +416,16 @@ ES5:
 Notice that we only pass an extra argument to our slice function which specified the position at which we want to start cutting to get our array. In this case, we skip the limit in the *arguments* variable and get all our other arguments.
 
 ES6:
-```function isFullAge(limit, ...years){
+```
+function isFullAge(limit, ...years){
     years.forEach(el=> console.log((2017-el) >= limit);
 }
 ```
 We just add the additional parameters before the rest parameter
 
 ### Default Parameters
-```function Person(firstName, lastName, yearOfBirth, nationality){
+```
+function Person(firstName, lastName, yearOfBirth, nationality){
 this.firstName = firstName;
 this.lastName = lastName;
 this.yearOfBirth = yearOfBirth;
@@ -413,7 +436,8 @@ JavaScript allows us to call functions without specifying all of the parameters.
 ```var john = new Person("John", "Smith");```
 What if we wanted to add a default for the last name and the nationality?
 ES5:
-```function Person(firstName, lastName, yearOfBirth, nationality){
+```
+function Person(firstName, lastName, yearOfBirth, nationality){
 lastName = (lastName === undefined)? "Smith":lastName;
 nationality = (nationality === undefined)? "Zimbabwean":nationality;
 this.firstName = firstName;
@@ -439,7 +463,8 @@ In an object, we were restricted to using strings as the keys. In maps, we can u
 Creating and setting a map
 Use *new Map()* to create a map
 Use *set(key, value)* to insert elements
-```const question = new Map();
+```
+const question = new Map();
 //insert a first key-value pair
  question.set("question", "What is the official name of the latest major JavaScript version?");
  //inserting more key value pairs
@@ -458,20 +483,25 @@ Use *set(key, value)* to insert elements
  ```
  Size of map
  Use the *size* property of the map
- ```console.log(question.size);
+ ```
+ console.log(question.size);
  // 7
  ```
  Removing elements
  Use the *delete(key)* method
- ```question.delete(3);
+ ```
+ question.delete(3);
  console.log(question.size);
  // 6
  ```
  You can also use the *clear* method to remove everything from the map:
- ```question.clear();```
+ ```
+ question.clear();
+ ```
  Checking for a key
  Use the *has(key)* method
- ```if(question.has(2)){
+ ```
+ if(question.has(2)){
     question.delete(2);
     console.log(question.size);
  // 5
@@ -480,20 +510,24 @@ Use *set(key, value)* to insert elements
  
  Looping through maps
  Use the *forEach* method
- ```question.forEach((value, key)=> console.log(``This is ${key}, and its set to ${value}``)); 
+ ```
+ question.forEach((value, key)=> console.log(``This is ${key}, and its set to ${value}``)); 
  ```
  You can also use the *for-of* method
- ```for(let key of question){
+ ```
+ for(let key of question){
     console.log(``This is ${key}, and its set to ${question.get(key)}``));
  }
  ```
  Alternatively you can use the *entries* method to get all the key value pairs as you loop
-  ```for(let [key, value] of question.entries()){
+  ```
+  for(let [key, value] of question.entries()){
     console.log(``This is ${key}, and its set to ${value}``));
  }
  ```
  Since map keys can be more than just strings, we can use logic on them:
-   ```for(let [key, value] of question.entries()){
+   ```
+   for(let [key, value] of question.entries()){
       if(typeof(key) === "number"){
         console.log(``Answer ${key}:${value}``);
       }
@@ -508,7 +542,8 @@ Maps provide more functionality than regular objects:
 Make it easier to implement inheritence and to create objects based on blueprints. In ES5 the blueprints are called function constructors. We added methods to the prototype property of these blueprints in order to extend the behaviour of all instances created from the blueprints.
 
 ES5
-```var Person = function(name, yearOfBirth, job){
+```
+var Person = function(name, yearOfBirth, job){
     this.name = name;
     this.yearOfBirth = yearOfBirth;
     this.job = job;
