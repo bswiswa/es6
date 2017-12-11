@@ -400,3 +400,34 @@ ES6:
 `
 We just add the additional parameters before the rest parameter
 
+### Default Parameters
+`function Person(firstName, lastName, yearOfBirth, nationality){
+this.firstName = firstName;
+this.lastName = lastName;
+this.yearOfBirth = yearOfBirth;
+this.nationality = nationality;
+}
+`
+JavaScript allows us to call functions without specifying all of the parameters. It will simply assign undefined to the missing parameters. Thus the following code will run:
+`var john = new Person("John", "Smith");`
+What if we wanted to add a default for the last name and the nationality?
+ES5:
+`function Person(firstName, lastName, yearOfBirth, nationality){
+lastName = (lastName === undefined)? "Smith":lastName;
+nationality = (nationality === undefined)? "Zimbabwean":nationality;
+this.firstName = firstName;
+this.lastName = lastName;
+this.yearOfBirth = yearOfBirth;
+this.nationality = nationality;
+}
+`
+ES6:
+We can specify the default values right where we declare the parameters
+`
+function Person(firstName, lastName = "Smith", yearOfBirth, nationality = "American"){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearOfBirth = yearOfBirth;
+    this.nationality = nationality;
+}
+`
