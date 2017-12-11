@@ -431,3 +431,74 @@ function Person(firstName, lastName = "Smith", yearOfBirth, nationality = "Ameri
     this.nationality = nationality;
 }
 `
+## Maps
+A map is a new key-value data structure in ES6.
+In an object, we were restricted to using strings as the keys. In maps, we can use any kind of primitive value eg numbers, strings, booleans, even functions and objects
+
+Creating and setting a map
+Use *new Map()* to create a map
+Use *set(key, value)* to insert elements
+`const question = new Map();
+//insert a first key-value pair
+ question.set("question", "What is the official name of the latest major JavaScript version?");
+ //inserting more key value pairs
+ question.set(1, "ES5");
+ question.set(2, "ES6");
+ question.set(3, "ES2015");
+ question.set("correct", 3);
+ question.set(true, "Correct answer");
+ question.set(false, "Wrong, please try again");
+ `
+ Retrieving info from map
+ Use the *get(key)* method:
+ `
+ console.log(question.get("question"));
+ //What is the official name of the latest major JavaScript version?
+ `
+ Size of map
+ Use the *size* property of the map
+ `console.log(question.size);
+ // 7
+ `
+ Removing elements
+ Use the *delete(key)* method
+ `question.delete(3);
+ console.log(question.size);
+ // 6
+ `
+ You can also use the *clear* method to remove everything from the map:
+ `question.clear();`
+ Checking for a key
+ Use the *has(key)* method
+ `if(question.has(2)){
+    question.delete(2);
+    console.log(question.size);
+ // 5
+ }
+ `
+ 
+ Looping through maps
+ Use the *forEach* method
+ `question.forEach((value, key)=> console.log(``This is ${key}, and its set to ${value}``)); 
+ `
+ You can also use the *for-of* method
+ `for(let key of question){
+    console.log(``This is ${key}, and its set to ${question.get(key)}``));
+ }
+ `
+ Alternatively you can use the *entries* method to get all the key value pairs as you loop
+  `for(let [key, value] of question.entries()){
+    console.log(``This is ${key}, and its set to ${value}``));
+ }
+ `
+ Since map keys can be more than just strings, we can use logic on them:
+   `for(let [key, value] of question.entries()){
+      if(typeof(key) === "number"){
+        console.log(``Answer ${key}:${value}``);
+      }
+ }
+ `
+Maps provide more functionality than regular objects:
+-  keys can be more than just strings which opens up other logic possibilities
+- we can check the size of a map easily with its *size* property
+- maps are iterable thus it is easy to loop and manipulate data in them.
