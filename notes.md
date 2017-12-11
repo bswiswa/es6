@@ -502,3 +502,80 @@ Maps provide more functionality than regular objects:
 -  keys can be more than just strings which opens up other logic possibilities
 - we can check the size of a map easily with its *size* property
 - maps are iterable thus it is easy to loop and manipulate data in them.
+
+## Classes
+Make it easier to implement inheritence and to create objects based on blueprints. In ES5 the blueprints are called function constructors. We added methods to the prototype property of these blueprints in order to extend the behaviour of all instances created from the blueprints.
+
+ES5
+`var Person = function(name, yearOfBirth, job){
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
+
+var john = new Person("John", 1990, "teacher");
+`
+In order to make all instances of the Person blueprint, we add it to the prototype of that function constructor.
+`
+Person.prototype.calculateAge = function(){
+    var age = new Date().getFullYear() - this.yearOfBirth;
+}
+
+console.log(john.calculateAge());
+//27 (in 2017)
+`
+In ES6:
+We use the *class* keyword. The class has the same name as a function constructor. A class has to have a *constructor* method
+`
+class Person{
+    constructor(name, yearOfBirth, job){
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+}
+`
+To add a method to all instances, we can add a method inside of the class:
+`
+class Person{
+    constructor(name, yearOfBirth, job){
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+    
+    calculateAge(){
+        var age = new Date().getFullYear() - this.yearOfBirth;
+    }
+}
+`
+### Static methods
+We can add static methods to classes. These are not inherited by the instances.
+`
+class Person{
+    constructor(name, yearOfBirth, job){
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+    
+    calculateAge(){
+        var age = new Date().getFullYear() - this.yearOfBirth;
+    }
+    
+    static greeting(){
+        console.log("Hey there!");
+    }
+}
+
+var john = new Person("John", 1990, "teacher");
+
+console.log(john.calculateAge()) // 27 in 2017 (works since it is inherited)
+
+console.log(Person.greeting());
+// Hey there!
+
+console.log(john.greeting()); //Error method undefined since it is not inherited
+`
+Note that class definitions ARE NOT HOISTED. We need to define and implement our classes before we use them.
+Also, we can only add methods and not properties to classes
