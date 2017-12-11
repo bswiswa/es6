@@ -1,37 +1,15 @@
-const boxes = document.querySelectorAll(".box");
-//recall that querySelectorAll returns a node list
-//we want to make that node list into a node array so we can loop through them with forEach
+//1. find the position of element that is 18 and over
+//2. find the age at that position
 
 //ES5
-/*
-var boxesArr = Array.prototype.slice.call(boxes);
-
-boxesArr.forEach(function(el){
-    el.style.backgroundColor = "dodgerblue";
+var ages = [12, 17, 5, 21, 14, 11];
+var full = ages.map(function(el){
+   return el >= 18; 
 });
-
-*/
-
-//ES6
-// using the from method
-const boxesArr = Array.from(boxes);
-boxesArr.forEach(el=> el.style.backgroundColor = "dodgerblue");
-
-//ES5
-/*for(var i = 0; i < boxesArr.length; i++){
-    if(boxesArr[i].className === "box blue")
-        continue;
-    else
-        boxesArr[i].textContent = "I changed to blue";
-}
-*/
+var position = full.indexOf(true);
+//to get the age at that position
+var fullAge = ages[position];
 
 //ES6
-for(const el of boxesArr){
-    if(el.className === "box blue")
-        continue;
-    else
-        el.textContent = "I changed to blue";
-}
-
-// we can also use the includes methods eg el.className.includes("blue")
+let index = ages.findIndex(el => el >= 18);
+let fullAgeAtIndex = ages.find(el => el > = 18);

@@ -313,4 +313,5 @@ ES6:
 ### Looping
 When looping through an array with *forEach* or *map* we cannot use a *break* statement. We have to use the simple for(var i...) loop
 With ES6 we can use the for-of loop eg for(let el of array){}
-
+### Searching Arrays
+ES6 has the *find* and *findIndex* methods 
