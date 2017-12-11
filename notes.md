@@ -156,8 +156,8 @@ const ageStrings = years.map((el, index) => ``Age of element ${index + 1} is ${2
  } );
  ```
  ### this and Arrow Functions
- Arrow functions do not have their own *this* keyword, they use the *this* keyword of the function that they are written in. We say that they have a lexical *this* variable
- ES5 *this* (problem?):
+ Arrow functions do not have their own **this** keyword, they use the **this** keyword of the function that they are written in. We say that they have a lexical **this** variable
+ ES5 **this** (problem?):
  ```
  var box5 = {
     color: "green",
@@ -171,8 +171,8 @@ const ageStrings = years.map((el, index) => ``Age of element ${index + 1} is ${2
 };
 box5.clickMe();
 ```
-This will not work as expected because only object methods use the object as their *this* reference. Regular function calls will use the global window object as their this reference. 
-Thus the clickMe function uses the box5 object as its *this* reference but the anonymous function/event handler inside of it is a regular function call and thus it uses the global context which has window as its object. The window object does not have the position and color properties and hence our code above would not work. 
+This will not work as expected because only object methods use the object as their **this** reference. Regular function calls will use the global window object as their this reference. 
+Thus the clickMe function uses the box5 object as its **this** reference but the anonymous function/event handler inside of it is a regular function call and thus it uses the global context which has window as its object. The window object does not have the position and color properties and hence our code above would not work. 
 The workaround to this is shown below:
 
  ES5 workaround:
@@ -191,7 +191,7 @@ The workaround to this is shown below:
 box5.clickMe();
 ```
 Here we use the self variable set to our object in our regular function call/event handler and it works fine.
-In ES6, the arrow functions always use the *this* object of the surrounding method and so we avoid the problem above:
+In ES6, the arrow functions always use the **this** object of the surrounding method and so we avoid the problem above:
 
 ```
 const box6 = {
@@ -223,7 +223,7 @@ Person.prototype.myFriends = function(friends){
 var friends = ["Bob", "Jane", "Mark"];
 (new Person("Batsi")).myFriends(friends);
 ```
-The above code will run but *this.name* will be undefined. The problem here is similar to what we had above -- the myFriends function rightfully points to the Person object as its *this* reference. However, the map function's anonymous function is a regular function and so does not point to the Person object that invoked the whole process. Instead, this anonymous function is pointing to the window object since it is a regular function call in a global context.
+The above code will run but **this.name** will be undefined. The problem here is similar to what we had above -- the myFriends function rightfully points to the Person object as its **this** reference. However, the map function's anonymous function is a regular function and so does not point to the Person object that invoked the whole process. Instead, this anonymous function is pointing to the window object since it is a regular function call in a global context.
 We can fix this in ES5 in two ways:
 1. By using the self = this declaration:
 ```
@@ -236,7 +236,7 @@ Person.prototype.myFriends = function(friends){
 }
 ```
 OR
-2. by using the *bind*, *call* and *apply* methods since they allow us to define the *this* variable manually. *call* immediately runs the function whilst *bind* can be used to create a copy of a function, with some preset variables.
+2. by using the **bind**, **call** and **apply** methods since they allow us to define the **this** variable manually. **call** immediately runs the function whilst **bind** can be used to create a copy of a function, with some preset variables.
 
 ```
 Person.prototype.myFriends = function(friends){
@@ -327,12 +327,12 @@ let [age, retirement] = calcRetirementAge(1990);
 ```
 ## Arrays
 ### New methods
-- use the *Array.from* method to get an array from a list
+- use the **Array.from** method to get an array from a list
 ### Looping
-When looping through an array with *forEach* or *map* we cannot use a *break* statement. We have to use the simple for(var i...) loop
+When looping through an array with **forEach** or **map** we cannot use a **break** statement. We have to use the simple for(var i...) loop
 With ES6 we can use the for-of loop eg for(let el of array){}
 ### Searching Arrays
-ES6 has the *find* and *findIndex* methods 
+ES6 has the **find** and **findIndex** methods 
 
 ## Spread Operator
 If we have a function
@@ -344,12 +344,12 @@ function addFourNumbers(a, b, c, d){
 
 if we had these numbers in an array, how would we pass those numbers into this function?
 
-In ES5 we can use the *apply* method. It receives an array and calls a function that will be used on each element of the array. We use it in this case as follows
+In ES5 we can use the **apply** method. It receives an array and calls a function that will be used on each element of the array. We use it in this case as follows
 ``` 
 var nums = [18, 38, 12, 21];
     var sums = addFourNumbers.apply(null, nums);
 ```
-Here apply takes *null* as its *this* reference since it is not needed but also takes in the array on whose elements and uses all of them as parameters to the addFourNumbers function.
+Here apply takes **null** as its **this** reference since it is not needed but also takes in the array on whose elements and uses all of them as parameters to the addFourNumbers function.
 
 In ES6 we use the spread operator which expands an array into its components.
 ```
@@ -363,20 +363,20 @@ const parents = [ "Baba", "Amai"];
 const family = [...parents, ...children];
 ```
 
-We can use the spread operator on other data structures as well eg a node list returned by *document.querySelectorAll()*
+We can use the spread operator on other data structures as well eg a node list returned by **document.querySelectorAll()**
 ```
 const h = document.querySelectorAll("h1");
 const p = document.querySelectorAll("p");
 const headersAndParagraphs = [...h, ...p];
 ```
-We can then proceed to change the node list to an array and loop through it using the *Array.from()* method then *forEach* to loop.
+We can then proceed to change the node list to an array and loop through it using the **Array.from()** method then **forEach** to loop.
 
 ## Function Parameters
 ### Rest parameters
 Rest parameters allow us to pass an arbitrary number of arguments into a function.
 Rest parameters use three dots like the spread operator. The spread operator transforms a structure into its constituent elements whilst rest parameters receive some single values and transform them into an array in the function call.
 
-Each function has a special *arguments* variable which is an object with keys corresponding to the parameters passed into a function. It is an array-like structure but not an array.
+Each function has a special **arguments** variable which is an object with keys corresponding to the parameters passed into a function. It is an array-like structure but not an array.
 
 ES5:
 ```
@@ -415,7 +415,7 @@ function isFullAge(limit){
     });
 }
 ```
-Notice that we only pass an extra argument to our slice function which specified the position at which we want to start cutting to get our array. In this case, we skip the limit in the *arguments* variable and get all our other arguments.
+Notice that we only pass an extra argument to our slice function which specified the position at which we want to start cutting to get our array. In this case, we skip the limit in the **arguments** variable and get all our other arguments.
 
 ES6:
 ```
@@ -463,8 +463,8 @@ A map is a new key-value data structure in ES6.
 In an object, we were restricted to using strings as the keys. In maps, we can use any kind of primitive value eg numbers, strings, booleans, even functions and objects
 
 Creating and setting a map
-Use *new Map()* to create a map
-Use *set(key, value)* to insert elements
+Use **new Map()** to create a map
+Use **set(key, value)** to insert elements
 ```
 const question = new Map();
 //insert a first key-value pair
@@ -478,30 +478,30 @@ const question = new Map();
  question.set(false, "Wrong, please try again");
  ```
  Retrieving info from map
- Use the *get(key)* method:
+ Use the **get(key)** method:
  ```
  console.log(question.get("question"));
  //What is the official name of the latest major JavaScript version?
  ```
  Size of map
- Use the *size* property of the map
+ Use the **size** property of the map
  ```
  console.log(question.size);
  // 7
  ```
  Removing elements
- Use the *delete(key)* method
+ Use the **delete(key)** method
  ```
  question.delete(3);
  console.log(question.size);
  // 6
  ```
- You can also use the *clear* method to remove everything from the map:
+ You can also use the **clear** method to remove everything from the map:
  ```
  question.clear();
  ```
  Checking for a key
- Use the *has(key)* method
+ Use the **has(key)** method
  ```
  if(question.has(2)){
     question.delete(2);
@@ -511,17 +511,17 @@ const question = new Map();
  ```
  
  Looping through maps
- Use the *forEach* method
+ Use the **forEach** method
  ```
  question.forEach((value, key)=> console.log(``This is ${key}, and its set to ${value}``)); 
  ```
- You can also use the *for-of* method
+ You can also use the **for-of** method
  ```
  for(let key of question){
     console.log(``This is ${key}, and its set to ${question.get(key)}``));
  }
  ```
- Alternatively you can use the *entries* method to get all the key value pairs as you loop
+ Alternatively you can use the **entries** method to get all the key value pairs as you loop
   ```
   for(let [key, value] of question.entries()){
     console.log(``This is ${key}, and its set to ${value}``));
@@ -537,7 +537,7 @@ const question = new Map();
  ```
 Maps provide more functionality than regular objects:
 -  keys can be more than just strings which opens up other logic possibilities
-- we can check the size of a map easily with its *size* property
+- we can check the size of a map easily with its **size** property
 - maps are iterable thus it is easy to loop and manipulate data in them.
 
 ## Classes
@@ -563,7 +563,7 @@ console.log(john.calculateAge());
 //27 (in 2017)
 ```
 In ES6:
-We use the *class* keyword. The class has the same name as a function constructor. A class has to have a *constructor* method
+We use the **class** keyword. The class has the same name as a function constructor. A class has to have a **constructor** method
 ```
 class Person{
     constructor(name, yearOfBirth, job){
