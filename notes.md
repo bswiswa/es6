@@ -315,3 +315,37 @@ When looping through an array with *forEach* or *map* we cannot use a *break* st
 With ES6 we can use the for-of loop eg for(let el of array){}
 ### Searching Arrays
 ES6 has the *find* and *findIndex* methods 
+
+## Spread Operator
+If we have a function
+`
+function addFourNumbers(a, b, c, d){
+    return a + b + c + d;
+}
+`
+
+if we had these numbers in an array, how would we pass those numbers into this function?
+
+In ES5 we can use the *apply* method. It receives an array and calls a function that will be used on each element of the array. We use it in this case as follows
+` var nums = [18, 38, 12, 21];
+    var sums = addFourNumbers.apply(null, nums);
+`
+Here apply takes *null* as its *this* reference since it is not needed but also takes in the array on whose elements and uses all of them as parameters to the addFourNumbers function.
+
+In ES6 we use the spread operator which expands an array into its components.
+`let nums = [18, 38, 12, 21];
+let sums = addFourNumbers(...nums);
+`
+Spread operator can also be used to join arrays:
+`
+const children = [ "Sam", "Batsi", "Shingi"];
+const parents = [ "Baba", "Amai"];
+const family = [...parents, ...children];
+`
+
+We can use the spread operator on other data structures as well eg a node list returned by *document.querySelectorAll()*
+`const h = document.querySelectorAll("h1");
+const p = document.querySelectorAll("p");
+const headersAndParagraphs = [...h, ...p];
+`
+We can then proceed to change the node list to an array and loop through it using the *Array.from()* method then *forEach* to loop.
