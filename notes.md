@@ -146,4 +146,47 @@ If we are using multiple arguments in an arrow function, we must use parentheses
  `
  ### this and Arrow Functions
  Arrow functions do not have their own *this* keyword, they use the *this* keyword of the function that they are written in. We say that they have a lexical *this* variable
- 
+ ES5 *this* (problem?):
+ `var box5 = {
+    color: "green",
+    position: 1,
+    clickMe: function(){
+        document.querySelector(".green").addEventListener("click", function(){
+            
+           alert("This is box number " + this.position + " , and it is "+ this.color); 
+        });
+    }
+};
+box5.clickMe();
+`
+This will not work as expected because only object methods use the object as their *this* reference. Regular function calls will use the global window object as their this reference. 
+Thus the clickMe function uses the box5 object as its *this* reference but the anonymous function/event handler inside of it is a regular function call and thus it uses the global window as its object. The window object does not have the position and color properties and hence our code above would not work. 
+The workaround to this is shown below:
+
+ ES5 workaround:
+ `var box5 = {
+    color: "green",
+    position: 1,
+    clickMe: function(){
+        var self = this;
+        document.querySelector(".green").addEventListener("click", function(){
+            
+           alert("This is box number " + self.position + " , and it is "+ self.color); 
+        });
+    }
+};
+box5.clickMe();
+`
+Here we use the self variable set to our object in our regular function call/event handler and it works fine.
+In ES6, the arrow functions always use the *this* object of the surrounding method and so we avoid the problem above:
+
+`const box6 = {
+    color: "green",
+    position: 1,
+    clickMe: function(){
+    document.querySelector(".green").addEventListener("click", ()=>{
+           alert("This is box number " + this.position + " , and it is "+ this.color); 
+        });
+    }
+};
+`

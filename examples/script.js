@@ -1,12 +1,10 @@
-var box5 = {
+const box6 = {
     color: "green",
     position: 1,
-    clickMe: function(){
-        var self = this;
-        document.querySelector(".green").addEventListener("click", function(){
+    clickMe: function(){ document.querySelector(".green").addEventListener("click", ()=>{
             
-           alert("This is box number " + self.position + " , and it is "+ self.color); 
+           alert("This is box number " + this.position + " , and it is "+ this.color); 
         });
     }
 };
-box5.clickMe();
+box6.clickMe();
