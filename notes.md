@@ -106,7 +106,7 @@ Use back-ticks to tell JavaScript that we want to use a template literal
 let firstName = "Batsi";
 let lastName = "Swiswa";
 
-console.log(`` `This is ${firstName} ${lastName}. This year is ${(new Date()).getFullYear()}` ``);
+console.log(\`This is ${firstName} ${lastName}. This year is ${(new Date()).getFullYear()}\`);
 ```
 You can even run functions inside template literals as well as shown above.
 ### New String methods
