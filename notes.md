@@ -349,3 +349,54 @@ const p = document.querySelectorAll("p");
 const headersAndParagraphs = [...h, ...p];
 `
 We can then proceed to change the node list to an array and loop through it using the *Array.from()* method then *forEach* to loop.
+
+## Function Parameters
+### Rest parameters
+Rest parameters allow us to pass an arbitrary number of arguments into a function.
+Rest parameters use three dots like the spread operator. The spread operator transforms a structure into its constituent elements whilst rest parameters receive some single values and transform them into an array in the function call.
+
+Each function has a special *arguments* variable which is an object with keys corresponding to the parameters passed into a function. It is an array-like structure but not an array.
+
+ES5:
+`function isFullAge(){
+    //get array from arguments object
+    var argsArr = Array.prototype.slice.call(arguments);
+    //loop and calculate
+    argsArr.forEach(function(el){
+    console.log((2017 - el) >= 18);
+    });
+}
+`
+Even though isFullAge() is defined as taking no arguments, we can call it with variable numbers of arguments and it will still work. eg isFullAge(1980, 1987, 1982, 1900);
+
+ES6:
+We can specify the rest parameter operator as an argument in functions that take variable number of arguments.
+The rest parameter will transform the arguments into an array and then passes it into the function
+`function isFullAge(...years){
+    years.forEach(el=> console.log((2017-el) >= 18);
+}
+`
+The spread operator and rest parameters differ in the places that we use them.
+The spread operator can be used in a function call to expand a data structure being passed into its elements. The  rest parameter is used in a function declaration to make the function accept an arbitrary number of arguments.
+
+If we wanted to pass in the age limit dynamically to our isFullAge function here is how we would modify our functions in ES5 and ES6
+
+ES5:
+`function isFullAge(limit){
+    //get array from arguments object
+    var argsArr = Array.prototype.slice.call(arguments, 1);
+    //loop and calculate
+    argsArr.forEach(function(el){
+    console.log((2017 - el) >= limit);
+    });
+}
+`
+Notice that we only pass an extra argument to our slice function which specified the position at which we want to start cutting to get our array. In this case, we skip the limit in the *arguments* variable and get all our other arguments.
+
+ES6:
+`function isFullAge(limit, ...years){
+    years.forEach(el=> console.log((2017-el) >= limit);
+}
+`
+We just add the additional parameters before the rest parameter
+
