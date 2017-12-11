@@ -105,6 +105,7 @@ let lastName = "Swiswa";
 console.log(``This is ${firstName} ${lastName}. This year is ${(new Date()).getFullYear()}``);
 `
 You can even run functions inside template literals as well as shown above.
+### New String methods
 Other methods available for strings
 ` let firstName = "Batsi";
     console.log(firstName.startsWith("B"));
@@ -116,3 +117,30 @@ Other methods available for strings
     console.log(firstName.repeat(3));
     //BatsiBatsiBatsi
     `
+
+## Arrow Functions
+ES5
+`var years = [1990, 1965, 1982];
+var ages = years.map(function(el){
+    return 2017 - el;
+});
+console.log(ages);
+//[27, 52, 35]
+`
+ES6
+`const years = [1990, 1965, 1982];
+ const ages = years.map(el => 2017 - el);
+ console.log(ages);
+ //[27, 52, 35]
+ `
+Arrow function lets us write less code
+If we are using multiple arguments in an arrow function, we must use parentheses eg
+`const ageStrings = years.map((el, index) => ``Age of element ${index + 1} is ${2017 - el}``);
+ `
+ If our function has more than one line, we must use curly braces and also explicitly specify the return value:
+ `const ageStrings = years.map((el, index) => {
+    const now = new Date().getFullYear();
+    const age = new - el;
+    return ``Age of element ${index + 1} is ${now - el}``
+ } );
+ `
