@@ -106,7 +106,7 @@ Use back-ticks to tell JavaScript that we want to use a template literal
 let firstName = "Batsi";
 let lastName = "Swiswa";
 
-console.log(``This is ${firstName} ${lastName}. This year is ${(new Date()).getFullYear()}``);
+console.log(\`This is ${firstName} ${lastName}. This year is ${(new Date()).getFullYear()}\`);
 ```
 You can even run functions inside template literals as well as shown above.
 ### New String methods
@@ -145,14 +145,14 @@ const years = [1990, 1965, 1982];
 Arrow function lets us write less code
 If we are using multiple arguments in an arrow function, we must use parentheses eg
 ```
-const ageStrings = years.map((el, index) => ``Age of element ${index + 1} is ${2017 - el}``);
+const ageStrings = years.map((el, index) => \`Age of element ${index + 1} is ${2017 - el}\`);
  ```
  If our function has more than one line, we must use curly braces and also explicitly specify the return value:
  ```
  const ageStrings = years.map((el, index) => {
     const now = new Date().getFullYear();
     const age = new - el;
-    return ``Age of element ${index + 1} is ${now - el}``
+    return \`Age of element ${index + 1} is ${now - el}\`
  } );
  ```
  ### this and Arrow Functions
@@ -260,7 +260,7 @@ We can even use template literals
 ```
 Person.prototype.myFriends = function(friends){
     var arr = friends.map(el => 
-        ``${this.name} is friends with ${el}``);
+        \`${this.name} is friends with ${el}\`);
     console.log(arr);
 }
 ```
@@ -278,7 +278,7 @@ ES6:
 ```
 let batsi = ["Batsi", 26];
 let [name, age] = batsi;
-console.log(``${name} ${age}``);
+console.log(\`${name} ${age}\`);
 //Batsi 26
 ```
 ### For objects:
@@ -295,7 +295,7 @@ ES6:
 ```
 let batsi = { name: "Batsi", age: 26 };
 let { name, age } = batsi;
-console.log(``${name} ${age}``);
+console.log(\`${name} ${age}\`);
 //Batsi 26
 ```
 Note that in ES6, the names of the new variables have to exactly match keynames in the object in order for them to map as show above. Otherwise they will be undefined.
@@ -303,7 +303,7 @@ If we want to use different names for the variables we do it as follows:
 ```
 let batsi = { name: "Batsi", age: 26 };
 let { name: theName, age: theAge } = batsi;
-console.log(``${theName} ${theAge}``);
+console.log(\`${theName} ${theAge}\`);
 //Batsi 26
 ```
 ### Returning multiple variables
@@ -513,25 +513,25 @@ const question = new Map();
  Looping through maps
  Use the **forEach** method
  ```
- question.forEach((value, key)=> console.log(``This is ${key}, and its set to ${value}``)); 
+ question.forEach((value, key)=> console.log(\`This is ${key}, and its set to ${value}\`)); 
  ```
  You can also use the **for-of** method
  ```
  for(let key of question){
-    console.log(``This is ${key}, and its set to ${question.get(key)}``));
+    console.log(\`This is ${key}, and its set to ${question.get(key)}\`));
  }
  ```
  Alternatively you can use the **entries** method to get all the key value pairs as you loop
   ```
   for(let [key, value] of question.entries()){
-    console.log(``This is ${key}, and its set to ${value}``));
+    console.log(\`This is ${key}, and its set to ${value}\`));
  }
  ```
  Since map keys can be more than just strings, we can use logic on them:
    ```
    for(let [key, value] of question.entries()){
       if(typeof(key) === "number"){
-        console.log(``Answer ${key}:${value}``);
+        console.log(\`Answer ${key}:${value}\`);
       }
  }
  ```
