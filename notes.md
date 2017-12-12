@@ -1,12 +1,12 @@
 # Notes
 Official name is EcmaScript 2015
-Currently ES5 is the version supported by all browsers.
+- Currently ES5 is the version supported by all browsers.
 - ES6 has partial support so it should be used with care in production.
 - There is also ES2016 but it has few new features
 
 ## Variable declarations
 `let` keyword is used to declare variables
-Variables declared with `let` are block-scoped whilst those declared with `var` are function-scoped.
+- Variables declared with `let` are block-scoped whilst those declared with `var` are function-scoped.
 Thus:
 ```javascript
 function es5(condition){
@@ -620,3 +620,76 @@ console.log(john.greeting()); //Error method undefined since it is not inherited
 ```
 Note that class definitions ARE NOT HOISTED. We need to define and implement our classes before we use them.
 Also, we can only add methods and not properties to classes
+
+### Inheritence and Subclasses
+If we have two classes Person and Athlete where Athlete is a subclass of Person, let us see how we go about inheritence in ES5 and in ES6
+ES5:
+```javascript
+var Person = function(name, yearOfBirth, job){
+    this.name = name;
+    this.yearOfBirth = yearOfBirth;
+    this.job = job;
+}
+
+var Athlete = function(name, yearOfBirth, job, olympicGames, medals){
+    Person.call(this, name, yearOfBirth, job);
+    this.olympicGames = olympicGames;
+    this.medals = medals;
+}
+```
+Why do we have to call the superclass function constructor with the **this** keyword? 
+To explain this we need to remember how the **new** operator works:
+When we call `new Athlete(...)`, first `new` creates an empty object then calls the Athlete function constructor and sets the `this` keyword to this newly created empty object. In this way, the execution context of the function constructor will point to the new object whenever the `this` keyword is used.
+Thus if we want to call the Person constructor then we need to call that function constructor and make sure that its `this` keyword is set to our newly created Athlete object.
+
+To create the correct prototype chain, we use `Object.create()` because it allows us to specify the prototype of an object. In this case we want to prototype of an Athlete to be the prototype of a Person and in this way they become connected.
+```javascript
+Athlete.prototype = Object.create(Person.prototype);
+```
+Now if we create Athlete instances
+```javascript
+var athlete = new Athlete("John", 1990, "swimmer", 3, 10);
+```
+Here john's prototype will be equal to `Person.prototype`
+
+If we want to add methods to the Athlete prototype property, we have to add them after we link Athlete's property to Person's prototype
+```javascript
+Athlete.prototype.wonMedal = function(){
+    this.medals++;
+}
+```
+In ES6:
+We use the **extends** keyword. In our constructor we make a call to the superclass constructor using the **super** function call.
+
+```javascript
+class Person{
+    constructor(name, yearOfBirth, job){
+        this.name = name;
+        this.yearOfBirth = yearOfBirth;
+        this.job = job;
+    }
+    
+    calculateAge(){
+        var age = new Date().getFullYear() - this.yearOfBirth;
+    }
+}
+
+class Athlete extends Person{
+    constructor(name, yearOfBirth, job, olympicGames, medals){
+        super(name, yearOfBirth, job);
+        this.olympicGames = olympicGames;
+        this.medals = medals;
+    }
+    
+    wonMedal(){
+        this.medals++;
+    }
+}
+
+let athlete = new Athlete("John", 1990, "swimmer", 3, 10);
+
+console.log(athlete.medals);   // 10
+athlete.wonMedal();       
+console.log(athlete.medals)    // 11
+console.log(athlete.calculateAge()); // 27 (in 2017)
+```
