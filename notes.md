@@ -693,3 +693,25 @@ athlete.wonMedal();
 console.log(athlete.medals)    // 11
 console.log(athlete.calculateAge()); // 27 (in 2017)
 ```
+
+## How to use ES6 today
+In order to use ES6 today, we need to transpile it back to ES5 since it has not been adopted by all browsers yet.
+We can use the Babel transpiler.
+
+- in order to use Babel we first need to download and install Node.js and npm
+- open Terminal and test by running the command `npm -v`
+- navigate to app folder
+- run `npm install --save-dev babel-cli babel-preset-es2015 babel-polyfill`
+- this makes a local installations of these 3 packages and not global installation
+- these packages will be located in a folder called **node_modules** in your application
+- you can transpile on the terminal. If you are still in the application folder you can run babel by running the following command:
+```
+./node_modules/.bin/babel --presets es2015 script.js --out-file script-transpiled.js
+```
+The **babel-preset-es2015** allows us to transpile ES2015 code back to ES5.
+babel-polyfill has functions that allow ES5 to have newer functionality
+- change the **src** tag of your `<script></script>` to use the **script-transfiled.js** file
+- navigate in the polyfill package to the `dist/` folder and copy the **polyfill.min.js** file. Paste it into your app directory
+- in the html file, make another `<script></script>` tag and make its source **polyfill.min.js**
+
+
